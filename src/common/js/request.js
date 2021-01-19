@@ -1,6 +1,4 @@
 import axios from 'axios'
-// import store from '@/store'
-// import { getToken } from '@/utils/auth'
 import {
   Toast
 } from 'vant'
@@ -31,7 +29,8 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(res => {
     const code = res.data.code
-    if (code != 200 && code !== '') {
+    if (code !== 200) {
+      console.log('res.data.code1111' + res.data.msg)
       Toast(res.data.msg);
       return Promise.reject('error')
     } else {

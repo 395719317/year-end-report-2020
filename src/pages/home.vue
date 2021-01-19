@@ -1,15 +1,17 @@
 <template>
   <div class="page">
-    <head-nav ></head-nav>
+    <head-nav></head-nav>
     <div class="home ps-r">
       <div class="name tf-r-8">丁鹏</div>
-      <div class="receive-btn ps-a ps-b-100 ps-l-0 ps-r-0 m-a" @click="handleReceive"></div>
+      <div class="receive-btn ps-a ps-b-100 ps-l-0 ps-r-0 m-a" @click.prevent="handleReceive"></div>
     </div>
   </div>
 </template>
 
 <script>
 import headNav from "../components/nav";
+import { getToken } from "@/api/login";
+import { getReport } from "@/api/index";
 export default {
   components: {
     headNav
@@ -21,8 +23,41 @@ export default {
 
   methods: {
     handleReceive() {
-      this.$router.push({ path: "index" });
+      this.$router.push({ path: "step" });
+    },
+    // 用ticket换取token
+    async getToken() {
+      const that = this;
+      await new Promise(async resolve => {
+        if (!sessionStorage.getItem("token") && that.$route.query.ticket) {
+          if (that.$route.query.ticket) {
+            const { token, code } = await getToken({
+              ticket: that.$route.query.ticket
+            });
+            if (code === 200) {
+              sessionStorage.setItem("token", token);
+              that.$store.dispatch("user/doSetToken", token);
+              resolve();
+            }
+          } else {
+            that.$toast("链接缺少ticket");
+          }
+        } else {
+          resolve();
+        }
+      });
+    },
+    async getReport() {
+      const { data, code } = await getReport();
+    },
+    init() {
+      this.getToken().then(res => {
+        this.getReport();
+      });
     }
+  },
+  mounted() {
+    this.init();
   }
 };
 </script>

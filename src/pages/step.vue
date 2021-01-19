@@ -8,8 +8,8 @@
     </div>
     <swiper :options="swiperOption" ref="mySwiper">
       <!-- slides -->
-      <swiper-slide class="page01">
-        <div class="detail-page">
+      <swiper-slide class="page01" id="page01">
+        <div class="detail-page" @click="saveImg('page01')">
           <div class="text-detail-box" :class="thisActiveIndex == 0 ? 'have-animation' : ''">
             <p class="font-title-color">时光总是偷偷流流逝</p>
             <p class="font-title-color">转眼间一年又过去了</p>
@@ -18,7 +18,7 @@
           </div>
         </div>
       </swiper-slide>
-      <swiper-slide class="page02">
+      <swiper-slide class="page02" id="page02">
         <div class="detail-page">
           <div
             class="text-detail-box text-detail-box-01"
@@ -38,7 +38,7 @@
           </div>
         </div>
       </swiper-slide>
-      <swiper-slide class="page03">
+      <swiper-slide class="page03" id="page03">
         <div class="detail-page">
           <div
             class="text-detail-box text-detail-box-01"
@@ -58,19 +58,19 @@
           </div>
         </div>
       </swiper-slide>
-      <swiper-slide class="page04">
+      <swiper-slide class="page04" id="page04">
         <div class="detail-page"></div>
       </swiper-slide>
-      <swiper-slide class="page05">
+      <swiper-slide class="page05" id="page05">
         <div class="detail-page"></div>
       </swiper-slide>
-      <swiper-slide class="page06">
+      <swiper-slide class="page06" id="page06">
         <div class="detail-page"></div>
       </swiper-slide>
-      <swiper-slide class="page07">
+      <swiper-slide class="page07" id="page07">
         <div class="detail-page"></div>
       </swiper-slide>
-      <swiper-slide class="page08">
+      <swiper-slide class="page08" id="page08">
         <div class="detail-page">
           <div
             class="text-detail-box text-detail-box-01"
@@ -81,7 +81,7 @@
               不知不觉，我和xxx一起走过了
               <span class="font-col-blue">9999天</span>
             </p>
-            <p class="font-title-color">在习以为常的生活里，总有些简单而美好的相遇</p>
+            <p class="font-title-color" @click="saveImg('page08')">在习以为常的生活里，总有些简单而美好的相遇</p>
           </div>
         </div>
       </swiper-slide>
@@ -93,6 +93,7 @@
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import { getReport } from "@/api/index";
 import headNav from "../components/nav";
+import html2canvas from "html2canvas"
 export default {
   components: {
     swiper,
@@ -114,7 +115,7 @@ export default {
         autoplay: false, // 是否自动播放
         height: window.innerHeight, // 高
         width: window.innerWidth, //宽
-        speed: 1000, // 切换速度
+        speed: 700, // 切换速度
         on: {
           slideChange: () => {
             // debugger;
@@ -182,6 +183,44 @@ export default {
       // ele.addEventListener("ended", function() {
       //   ele.style.display = "none";
       // });
+    },
+    saveImg(id) {
+      this.htmToBase64(id).then(canvas => {
+        var base64 = canvas.toDataURL("image/png");
+        if (!base64) {
+          this.$toast("获取图片失败");
+          return;
+        }
+        var bs64 = base64.split("base64,")[1];
+        window.cordova.exec(
+          function(result) {
+            this.$toast("图片已保存到本地相册，请将图片分享给好友吧~");
+          },
+          function(error) {
+            this.$toast("调用失败");
+          },
+          "WorkPlus_Image",
+          "actionForLongPressImage",
+          [{ imageData: bs64 }]
+        );
+      });
+    },
+   async  htmToBase64(id) {
+      var shareContent =document.querySelector(".page");
+      var width = shareContent.offsetWidth;
+      var height = shareContent.offsetHeight;
+      var scale = 2;
+      var opts = {
+        scale: scale,
+        useCORS: true,
+        logging: true,
+        width: width,
+        height: height
+      };
+      // $(".fn-btn").hide();
+      // $(".navbar").hide();
+      // $("#bg07").find(".center03").addClass("m-top02 ");
+      return await html2canvas(document.querySelector(".page"), opts);
     }
   },
   mounted() {
