@@ -14,6 +14,11 @@ export default new Router({
             path: '/step',
             name: 'step',
             component: () => import('./pages/step.vue')
+        },
+        {
+            path: '/test',
+            name: 'test',
+            component: () => import('./pages/test.vue')
         }
     ]
 })

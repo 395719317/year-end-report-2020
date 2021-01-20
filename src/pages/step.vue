@@ -69,6 +69,7 @@
       </swiper-slide>
       <swiper-slide class="page07" id="page07">
         <div class="detail-page"></div>
+        <china-map ></china-map>
       </swiper-slide>
       <swiper-slide class="page08" id="page08">
         <div class="detail-page">
@@ -94,11 +95,13 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 import { getReport } from "@/api/index";
 import headNav from "../components/nav";
 import html2canvas from "html2canvas"
+import chinaMap from "../components/Map/ChinaChart";
 export default {
   components: {
     swiper,
     swiperSlide,
-    headNav
+    headNav,
+    chinaMap
   },
   data() {
     return {
@@ -230,6 +233,11 @@ export default {
 </script>
 
 <style lang="scss">
+$browser-default-font-size: 37.5px !default;
+
+@function pxTorem($px) {
+    @return $px / $browser-default-font-size * 1rem;
+}
 .view {
   height: 100vh;
   width: 100vw;

@@ -2,7 +2,7 @@
   <div class="page">
     <head-nav></head-nav>
     <div class="home ps-r">
-      <div class="name tf-r-8">丁鹏</div>
+      <div class="name tf-r-8" @click="goTest">丁鹏</div>
       <div class="receive-btn ps-a ps-b-100 ps-l-0 ps-r-0 m-a" @click.prevent="handleReceive"></div>
     </div>
   </div>
@@ -24,6 +24,9 @@ export default {
   methods: {
     handleReceive() {
       this.$router.push({ path: "step" });
+    },
+    goTest(){
+      this.$router.push({path:'test'})
     },
     // 用ticket换取token
     async getToken() {

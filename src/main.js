@@ -7,6 +7,9 @@ import '@/assets/icons'
 import '@/common/scss/index.scss'
 import Vconsole from 'vconsole'
 import FastClick from 'fastclick'
+import echarts from 'echarts'
+console.log('main echarts',echarts);
+// Vue.prototype.$echarts = echarts
 import {
   Toast,
   Loading
@@ -16,6 +19,7 @@ Vue.use(Toast)
 Vue.use(Loading)
 const vConsole = new Vconsole();
 Vue.use(vConsole);
+Vue.prototype.$echarts = echarts;
 Vue.config.productionTip = false;
 FastClick.attach(document.body);
 
