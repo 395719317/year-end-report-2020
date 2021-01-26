@@ -84,13 +84,19 @@
   .tf-ry-#{$i}{
     transform: rotateY(#{$i}deg);
   }
+  .tf-ry--#{$i}{
+    transform: rotateY(-#{$i}deg);
+  }
   .tf-rx-#{$i}{
     transform: rotateX(#{$i}deg);
   }
-  .tf-r+#{$i}{
-    transform: rotate(#{$i}deg);
+  .tf-rx--#{$i}{
+    transform: rotateX(-#{$i}deg);
   }
   .tf-r-#{$i}{
+    transform: rotate(#{$i}deg);
+  }
+  .tf-r--#{$i}{
     transform: rotate(-#{$i}deg);
   }
   // width
@@ -290,10 +296,12 @@
   color: $c-b;
 }
 
+//字体theme
+
+
 //字体主题
 .c-theme {
-  color: $theme;
-  ;
+  color: #00479D;
 }
 
 //定义字体规范
@@ -428,4 +436,14 @@
   overflow: auto;
   // position: fixed;
   // top: 46px;
+}
+/*字体*/
+.ff-yzyt{
+  font-family: "方正姚体",'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
+}
+.ff-hwxw{
+  font-family: "华文新魏",'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
+}
+.ff-hwhp{
+  font-family: "华文琥珀",'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
 }

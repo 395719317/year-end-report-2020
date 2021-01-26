@@ -2,7 +2,7 @@
   <div class="page">
     <head-nav></head-nav>
     <div class="home ps-r">
-      <div class="name tf-r-8" @click="goTest">丁鹏</div>
+      <div class="name tf-r--8 " @click="goTest">丁鹏</div>
       <div class="receive-btn ps-a ps-b-100 ps-l-0 ps-r-0 m-a" @click.prevent="handleReceive"></div>
     </div>
   </div>
@@ -68,14 +68,14 @@ export default {
 .home {
   width: 100%;
   height: 100vh;
-  background: url(../assets/home.png) no-repeat;
+  background: url(../assets/1.png) no-repeat;
   background-size: 100% 100%;
   position: relative;
   .name {
     position: absolute;
-    top: 43%;
+    top: 33.8%;
     color: black;
-    left: 23%;
+    left: 24%;
     font-size: 15px;
   }
   .receive-btn {

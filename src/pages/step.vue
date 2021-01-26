@@ -1,20 +1,47 @@
 <template>
   <div class="page">
     <head-nav></head-nav>
-    <div class="fixed-hint" v-if="showFixedHint">
+    <div class="fixed-hint" v-if="showFixedHint" @click="saveImg('page01')">
       <i class="triangle-icon triangle-icon-small"></i>
-      <i class="triangle-icon triangle-icon-big"></i>
+      <!-- <i class="triangle-icon triangle-icon-big"></i> -->
       <span>向上滑，查看年度报告</span>
+    </div>
+    <div class="ps-f ps-b-0 zi-9999 p-20">
+      <div>姚琦玥 摄于 中国 · 新大陆科技园 · 北门</div>
+      <div>中国 · 福州 E116° 41' N26° 02’</div>
     </div>
     <swiper :options="swiperOption" ref="mySwiper">
       <!-- slides -->
       <swiper-slide class="page01" id="page01">
         <div class="detail-page" @click="saveImg('page01')">
-          <div class="text-detail-box" :class="thisActiveIndex == 0 ? 'have-animation' : ''">
+          <!-- <div class="text-detail-box" :class="thisActiveIndex == 0 ? 'have-animation' : ''">
             <p class="font-title-color">时光总是偷偷流流逝</p>
             <p class="font-title-color">转眼间一年又过去了</p>
             <p class="font-title-color">打开新大陆APP</p>
             <p class="font-important-color font-bold margin-top-5px">这一年你走过的痕迹</p>
+          </div> -->
+          <div class="paper-box ps-f ps-t-90 tf-r-5 p-10">
+            <div class="p-20 w-230 hp-100">
+                <div class="hp-100">
+                  <div class="pb-10">
+                    <div>2018年08月24日</div>
+                    <div>我的新大陆之旅从这一天开始,不知不觉间，我与新大陆已经一起奋斗了2年3个月26天了。</div>
+                  </div>
+                  <div  class="pb-10">
+                    <div>2018年08月24日</div>
+                    <div>我的新大陆之旅从这一天开始,不知不觉间，我与新大陆已经一起奋斗了2年3个月26天了。</div>
+                  </div>
+                  <div  class="pb-10">
+                    <div>2018年08月24日</div>
+                    <div>我的新大陆之旅从这一天开始,不知不觉间，我与新大陆已经一起奋斗了2年3个月26天了。</div>
+                  </div>
+                  <div  class="pb-10">
+                    <div>2018年08月24日</div>
+                    <div>我的新大陆之旅从这一天开始,不知不觉间，我与新大陆已经一起奋斗了2年3个月26天了。</div>
+                  </div>
+                </div>
+            </div>
+            
           </div>
         </div>
       </swiper-slide>
@@ -69,7 +96,7 @@
       </swiper-slide>
       <swiper-slide class="page07" id="page07">
         <div class="detail-page"></div>
-        <china-map ></china-map>
+        <china-map></china-map>
       </swiper-slide>
       <swiper-slide class="page08" id="page08">
         <div class="detail-page">
@@ -94,7 +121,7 @@
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import { getReport } from "@/api/index";
 import headNav from "../components/nav";
-import html2canvas from "html2canvas"
+import html2canvas from "html2canvas";
 import chinaMap from "../components/Map/ChinaChart";
 export default {
   components: {
@@ -208,8 +235,8 @@ export default {
         );
       });
     },
-   async  htmToBase64(id) {
-      var shareContent =document.querySelector(".page");
+    async htmToBase64(id) {
+      var shareContent = document.querySelector(".page");
       var width = shareContent.offsetWidth;
       var height = shareContent.offsetHeight;
       var scale = 2;
@@ -220,9 +247,6 @@ export default {
         width: width,
         height: height
       };
-      // $(".fn-btn").hide();
-      // $(".navbar").hide();
-      // $("#bg07").find(".center03").addClass("m-top02 ");
       return await html2canvas(document.querySelector(".page"), opts);
     }
   },
@@ -236,7 +260,7 @@ export default {
 $browser-default-font-size: 37.5px !default;
 
 @function pxTorem($px) {
-    @return $px / $browser-default-font-size * 1rem;
+  @return $px / $browser-default-font-size * 1rem;
 }
 .view {
   height: 100vh;
@@ -248,7 +272,7 @@ $browser-default-font-size: 37.5px !default;
 * {
   padding: 0;
   margin: 0;
-  color: #fff;
+  color: #333333;
 }
 
 html,
@@ -280,6 +304,10 @@ body {
 
 <style lang="scss" scoped>
 .page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
   width: 100%;
   height: 100vh;
   overflow: hidden;
@@ -322,9 +350,10 @@ body {
       height: 0;
       &.triangle-icon-small {
         top: 0;
-        border-bottom: 12px solid #fff;
-        border-right: 8px solid transparent;
-        border-left: 8px solid transparent;
+        width: 30px;
+        height: 30px;
+        background: url(../assets/arrow_up.png) no-repeat;
+        background-size: 30px 30px;
       }
       &.triangle-icon-big {
         top: 30px;
@@ -362,7 +391,7 @@ body {
     }
   }
   .page01 {
-    background: url(../assets/bg01.png) no-repeat;
+    background: url(../assets/2.jpg) no-repeat;
     background-size: 100% 100%;
     .detail-page {
       .text-detail-box {
@@ -390,7 +419,7 @@ body {
   }
 
   .page02 {
-    background: url(../assets/bg02.png) no-repeat;
+    background: url(../assets/3.jpg) no-repeat;
     background-size: 100% 100%;
     .detail-page {
       .text-detail-box-01 {
@@ -404,7 +433,7 @@ body {
     }
   }
   .page03 {
-    background: url(../assets/bg03.png) no-repeat;
+    background: url(../assets/4.jpg) no-repeat;
     background-size: 100% 100%;
     .detail-page {
       .text-detail-box-01 {
@@ -418,28 +447,36 @@ body {
     }
   }
   .page04 {
-    background: url(../assets/bg04.png) no-repeat;
+    background: url(../assets/5.jpg) no-repeat;
     background-size: 100% 100%;
   }
   .page05 {
-    background: url(../assets/bg05.png) no-repeat;
+    background: url(../assets/6.jpg) no-repeat;
     background-size: 100% 100%;
   }
   .page06 {
-    background: url(../assets/bg06.png) no-repeat;
+    background: url(../assets/7.jpg) no-repeat;
     background-size: 100% 100%;
   }
   .page07 {
-    background: url(../assets/bg07.png) no-repeat;
+    background: url(../assets/8.jpg) no-repeat;
     background-size: 100% 100%;
   }
   .page08 {
-    background: url(../assets/bg08.png) no-repeat;
+    background: url(../assets/9.jpg) no-repeat;
     background-size: 100% 100%;
     .text-detail-box-01 {
       top: 30%;
       right: 10%;
     }
+  }
+  .paper-box {
+    color:black;
+    padding:40px;
+    background: url(../assets/paper.png) no-repeat;
+    background-size: 350px 450px;
+    width: 350px;
+    height: 450px;
   }
 }
 </style>

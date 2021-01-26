@@ -1,21 +1,27 @@
 <template>
-  <div class="head-nav ps-f ps-t-0 zi-9999 ta-c wp-100 pt-10">
-    <div class="w-50 ps-a ps-l-0 ps-t-10 ta-l back pr-10 pl-5 lh-23" @click="handleClose">
-      <svg-icon icon-class="share" class="tf-ry-180 fz-18"  />
-      <span>离开</span>
+  <div class="head-nav ps-f ps-t-0 zi-9999 ta-c wp-100 pt-10 ">
+    <div class="w-50 ps-a ps-l-0 ps-t-10 ta-l back pr-10 pl-5 lh-23 c-w" @click="handleClose">
+      <svg-icon icon-class="share" class="tf-ry-180 fz-18 c-w" />
+      <span class="c-w">离开</span>
     </div>
     <img class="w-60 ps-a ps-t-30 ps-l-0 ps-r-0 m-a" src="../assets/newLand.png" />
     <div class="w-50 ps-a ps-r-0 share ps-t-10 ta-r pl-10 pr-5 lh-23" @click="handleShare">
       <span>分享</span>
       <svg-icon icon-class="share" class="fz-18" />
     </div>
+    <span class="ps-a" :class="playerStatus?'music':''" @click="handlePlay"><svg-icon icon-class="music" class="fz-18" /></span>
+    <audio v-if="playerStatus" hidden="true" autoplay="autoplay" loop="true" controls="controls">
+      <source src="ttps://www.w3school.com.cn/i/horse.ogg" />
+    </audio>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      playerStatus:false
+    };
   },
   components: {},
 
@@ -23,7 +29,7 @@ export default {
 
   methods: {
     handleClose() {
-      console.log('handleClose');
+      console.log("handleClose");
       window.cordova.exec(
         function(result) {
           // alert(JSON.stringify(result, null, 4));
@@ -37,7 +43,7 @@ export default {
       );
     },
     handleShare() {
-      console.log('handleShare');
+      console.log("handleShare");
       window.cordova.exec(
         function(result) {
           layer.msg("微信分享成功");
@@ -61,6 +67,9 @@ export default {
           }
         ]
       );
+    },
+    handlePlay(){
+      this.playerStatus=this.playerStatus?false:true;
     }
   }
 };
@@ -79,4 +88,12 @@ export default {
     opacity: 0.8;
   }
 }
+@keyframes rotating{
+from{transform:rotate(0)}
+to{transform:rotate(360deg)}
+}
+.music{
+animation:rotating 3s linear infinite;
+}
+
 </style>
