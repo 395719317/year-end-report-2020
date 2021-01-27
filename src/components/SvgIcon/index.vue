@@ -1,5 +1,5 @@
 <template>
-  <svg :class="svgClass" aria-hidden="true">
+  <svg :class="svgClass" aria-hidden="true" :style={fill:color}>
     <use :xlink:href="iconName"/>
   </svg>
 </template>
@@ -15,6 +15,10 @@ export default {
     className: {
       type: String,
       default: ''
+    },
+    color:{
+      type: String,
+      default: 'white'
     }
   },
   computed: {
@@ -37,7 +41,7 @@ export default {
   width: 1em;
   height: 1em;
   vertical-align: -0.15em;
-  fill: currentColor;
+  /* fill: white; */
   overflow: hidden;
 }
 </style>

@@ -2,7 +2,7 @@
   <div>
     <china-map
       :mapData="mapData"
-      style="width: 100%;height: 100vh"
+      style="width: 100%;height: 50vh"
       :mapOption="{
             'title': '地图',
             'titleColor': 'pink'}"

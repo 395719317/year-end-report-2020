@@ -1,5 +1,5 @@
 <template>
-  <div id="mapChart" class="chart"></div>
+  <div id="mapChart" ></div>
 </template>
 <script>
 import echarts from "echarts";
@@ -94,7 +94,7 @@ export default {
                         data: this.initData2(this.mapData)
                     }, */
           {
-            name: "出差次数",
+            name: "",
             type: "effectScatter",
             coordinateSystem: "geo",
             data: this.initData2(this.mapData),
@@ -102,13 +102,13 @@ export default {
             rippleEffect: {
               brushType: "stroke"
             },
-            // label: {
-            //   normal: {
-            //     show: false,
-            //     position: "right",
-            //     formatter: "{b}"
-            //   }
-            // },
+            label: {
+              normal: {
+                show: false,
+                position: "right",
+                formatter: "{b}"
+              }
+            },
             symbolSize: function(val) {
               return 4;
             },

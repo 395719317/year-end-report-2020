@@ -6,12 +6,18 @@
     </div>
     <img class="w-60 ps-a ps-t-30 ps-l-0 ps-r-0 m-a" src="../assets/newLand.png" />
     <div class="w-50 ps-a ps-r-0 share ps-t-10 ta-r pl-10 pr-5 lh-23" @click="handleShare">
-      <span>分享</span>
+      <span class="c-w">分享</span>
       <svg-icon icon-class="share" class="fz-18" />
     </div>
-    <span class="ps-a" :class="playerStatus?'music':''" @click="handlePlay"><svg-icon icon-class="music" class="fz-18" /></span>
-    <audio v-if="playerStatus" hidden="true" autoplay="autoplay" loop="true" controls="controls">
-      <source src="ttps://www.w3school.com.cn/i/horse.ogg" />
+    <div class="ps-a music-icon f-c ps-r-5 ps-t-50" :class="playerStatus?'music':''" @click="handlePlay">
+      <!-- <svg-icon icon-class="music" class="fz-18" /> -->
+      <img src="../assets/music-icon.png">
+      <div v-if="!playerStatus" class="line ps-a w-2 bg-w h-20 tf-r--35">
+      </div>
+    
+    </div>
+    <audio v-if="playerStatus" hidden="true" autoplay="autoplay" loop="true" controls="controls"  src="../assets/music/bgm.mp3">
+      <!-- <source src="https://www.w3school.com.cn/i/horse.ogg" /> -->
     </audio>
   </div>
 </template>
@@ -20,7 +26,7 @@
 export default {
   data() {
     return {
-      playerStatus:false
+      playerStatus:true
     };
   },
   components: {},
@@ -91,6 +97,17 @@ export default {
 @keyframes rotating{
 from{transform:rotate(0)}
 to{transform:rotate(360deg)}
+}
+.music-icon{
+  display:flex;
+  width:25px;
+  height:25px;
+  border-radius: 25px;
+  background:rgba(168, 195, 224,0.5);
+  img{
+    width:15px;
+    height:16px;
+  }
 }
 .music{
 animation:rotating 3s linear infinite;
